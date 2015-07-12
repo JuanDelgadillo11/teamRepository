@@ -12,6 +12,7 @@ var Game = function()
     this.col=0;
     player1= new Player();
     player1.setName('juan');
+    score=new Score();
 
 };
 
@@ -104,6 +105,13 @@ Game.prototype.play=function()
         console.log('Encontraste un par');
 
         console.log(this.showMatrix());
+        score.setAmountOfPoints();
+        var gameStatus=false;
+        gameStatus=score.validateIfGameFinished(this.row);
+        if(gameStatus==true){
+            console.log('You Win!! Congratulations');
+            this.goToMenu();
+        }
     }
     else{
         firstCard.isVisible=false;
@@ -124,6 +132,16 @@ Game.prototype.play=function()
 
 };
 
+Game.prototype.goToMenu=function(){
+    var option =window.prompt('For Play again enter y or to Exit the game enter n');
+    if (option==y)
+    {
+        console.log('New game start now');// aqui tenemos que resetear todo y llamar al juego
+    }
+    else{
+        console.log('Thanks to play ');
+    }
+};
 Game.prototype.showMatrix=function(){
 
     var returnValue='';
@@ -145,7 +163,7 @@ Game.prototype.controlAttempts=function(){
     else
     {
         this.attempts=this.attempts-1;
-        console.log('You have: '+this.attempts+' of '+this.credits+' number of attempts,'+ ' Player: '+player1.getName());
+        console.log('You have: '+this.attempts+' of '+this.credits+' number of attempts,'+ ' Player: '+player1.getName()+' and yor score is:'+score.getAmountOfPoints());
 
         //Validation that all matrix is completed
 
@@ -194,4 +212,28 @@ Card.prototype.getIsVisible=function()
 Card.prototype.showValue=function()
 {
     return this.isVisible ? this.value : this.defaultValue;
+};
+
+//Object Score control the points of the player
+var Score=function(){
+    this.amountOfPoints=0;
+};
+Score.prototype.getAmountOfPoints=function(){
+    return this.amountOfPoints;
+};
+Score.prototype.setAmountOfPoints=function(){
+    this.amountOfPoints=this.amountOfPoints+1;
+};
+
+Score.prototype.validateIfGameFinished=function(row){
+    var resultOfTheGame=false;
+
+    if(this.amountOfPoints==row)
+    {
+        resultOfTheGame=true;
+        return resultOfTheGame;
+    }
+    else{
+        return resultOfTheGame;
+    }
 };
