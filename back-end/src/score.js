@@ -1,7 +1,7 @@
 /**
  * Created by Juan Delgadillo
  */
-
+//Object Score control the points of the player
 var Score=function(){
     this.amountOfPoints=0;
 };

@@ -14,6 +14,10 @@ Card.prototype.getIsVisible=function()
     return this.isVisible;
 };
 
+// Card.prototype.setIsVisible=function()
+// {
+// this.name=true;
+// };
 Card.prototype.showValue=function()
 {
     return this.isVisible ? this.value : this.defaultValue;
